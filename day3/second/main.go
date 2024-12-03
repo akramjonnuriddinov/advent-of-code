@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func extractMulNumbers(memory string) int {
+func extractMulNumbers(input string) int {
 	mulPattern := regexp.MustCompile(`mul\(\s*(\d+)\s*,\s*(\d+)\s*\)`)
 	doPattern := regexp.MustCompile(`do\(\)`)
 	dontPattern := regexp.MustCompile(`don't\(\)`)
@@ -14,9 +14,9 @@ func extractMulNumbers(memory string) int {
 	enabled := true
 	total := 0
 
-	tokens := regexp.MustCompile(`mul\(\s*\d+\s*,\s*\d+\s*\)|do\(\)|don't\(\)`).FindAllString(memory, -1)
+	rgx := regexp.MustCompile(`mul\(\s*\d+\s*,\s*\d+\s*\)|do\(\)|don't\(\)`).FindAllString(input, -1)
 
-	for _, token := range tokens {
+	for _, token := range rgx {
 		if doPattern.MatchString(token) {
 			enabled = true
 		}
